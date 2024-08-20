@@ -130,3 +130,6 @@ venv/
 
 .chainlit
 chainlit.md
+
+# Secret
+.OPENAI_API_KEY
