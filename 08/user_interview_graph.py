@@ -8,8 +8,13 @@ from langgraph.graph import END, StateGraph
 
 
 class AgentState(TypedDict):
+    # ユーザーインタビューの目的
     mission: str
+
+    # インタビュー対象のペルソナ
     persona: str
+
+    # インタビューの会話履歴
     messages: Annotated[Sequence[BaseMessage], operator.add]
 
 
@@ -34,7 +39,8 @@ class UserInterviewGraph:
 
         # インタビュー後、更にインタビューを続けるか判定する「条件付きエッジ」を設定
         workflow.add_conditional_edges(
-            "interview", self.should_continue, {"continue": "question", "end": "report"}
+            "interview", self.should_continue, {
+                "continue": "question", "end": "report"}
         )
 
         # グラフをチェインとしてコンパイル
